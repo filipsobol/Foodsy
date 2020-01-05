@@ -19,8 +19,11 @@ class CreateProductsTable extends Migration
             $table->text('description')->nullable();
             $table->text('ingredients')->nullable();
             $table->integer('mass')->nullable();
+            $table->unsignedInteger('price');
             $table->string('image_path')->nullable();
-            $table->integer('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->unsignedBigInteger('category_id')->index();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

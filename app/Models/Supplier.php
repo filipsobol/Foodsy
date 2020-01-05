@@ -15,6 +15,11 @@ class Supplier extends Model
         return "slug";
     }
 
+    public function locations()
+    {
+        return $this->belongsToMany(Location::class, "supplier_location");
+    }
+
     public function categories()
     {
         return $this->hasMany(Category::class);

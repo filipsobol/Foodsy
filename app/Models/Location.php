@@ -14,4 +14,14 @@ class Location extends Model
     {
         return "slug";
     }
+
+    public function suppliers()
+    {
+        return $this->belongsToMany(Supplier::class, "supplier_location");
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, "product_location");
+    }
 }

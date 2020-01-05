@@ -7,6 +7,9 @@ Route::get("/locations", "LocationController@index");
 Route::get("/suppliers", "SupplierController@index");
 Route::get("/suppliers/{supplier}", "SupplierController@show");
 
+// Cart
+Route::post("/cart", "CartController@store");
+
 
 // ---------------- FRONT FOR CUSTOMERS ----------------
 // Cart

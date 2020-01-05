@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->text('ingredients')->nullable();
             $table->integer('mass')->nullable();
             $table->unsignedInteger('price');
+            $table->boolean('active');
             $table->string('image_path')->nullable();
             $table->unsignedBigInteger('category_id')->index();
 

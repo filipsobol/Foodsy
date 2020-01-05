@@ -19,4 +19,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Location::class, "product_location");
     }
+
+    public function carts()
+    {
+        return $this->belongsToMany(Cart::class, "cart_product")->withPivot("quantity");
+    }
 }

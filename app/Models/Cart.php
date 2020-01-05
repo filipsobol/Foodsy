@@ -22,4 +22,9 @@ class Cart extends Model
         "id" => "uuid",
         "email_verified_at" => "datetime",
     ];
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, "cart_product")->withPivot("quantity");
+    }
 }

@@ -8,11 +8,13 @@ Route::get("/suppliers", "SupplierController@index");
 Route::get("/suppliers/{supplier}", "SupplierController@show");
 
 // Cart
-Route::post("/cart", "CartController@store");
+Route::post("/cart", "CartController@createCart");
+Route::get("/cart/{cart}", "CartController@showCart");
+Route::post("/cart/{cart}/product", "CartController@addProduct");
+Route::put("/cart/{cart}/product", "CartController@updateProduct");
 
 
 // ---------------- FRONT FOR CUSTOMERS ----------------
-// Cart
 // Checkout
 // Order
 // Customer

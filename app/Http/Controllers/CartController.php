@@ -10,8 +10,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class CartController extends Controller
 {
-    const MAXIMUM_QUANTITY = 20;
-
     /**
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -48,7 +46,7 @@ class CartController extends Controller
     {
         $data = $request->validate([
             "product_id" => "required|integer|min:1|exists:products,id",
-            "quantity"   => "required|integer|min:1|max:" . $this::MAXIMUM_QUANTITY,
+            "quantity"   => "required|integer|min:1|max:" . Cart::MAXIMUM_PRODUCT_QUANTITY,
         ]);
 
         $product = $this->getProductForLocation($data["product_id"], $cart->location_id);
@@ -62,7 +60,7 @@ class CartController extends Controller
             ->first();
 
         $productInCart
-            ? $this->updateProductInTheCart($cart, $productInCart, min($productInCart->pivot->quantity + $data["quantity"], $this::MAXIMUM_QUANTITY))
+            ? $this->updateProductInTheCart($cart, $productInCart, min($productInCart->pivot->quantity + $data["quantity"], Cart::MAXIMUM_PRODUCT_QUANTITY))
             : $this->addProductToTheCart($cart, $product, $data["quantity"]);
 
         $cart->touch(); // Update updated_at time on Cart model
@@ -79,24 +77,18 @@ class CartController extends Controller
     {
         $data = $request->validate([
             "product_id" => "required|integer|min:1|exists:products,id",
-            "quantity"   => "required|integer|min:1|max:" . $this::MAXIMUM_QUANTITY,
+            "quantity"   => "required|integer|min:1|max:" . Cart::MAXIMUM_PRODUCT_QUANTITY,
         ]);
 
-        $product = $this->getProductForLocation($data["product_id"], $cart->location_id);
+        $product = $cart->products()
+            ->where("products.id", $data["product_id"])
+            ->first();
 
         if (!$product) {
             return response("Product cannot be updated", 400);
         }
 
-        $productInCart = $cart->products()
-            ->where("products.id", $product->id)
-            ->first();
-
-        if (!$productInCart) {
-            return response("Product cannot be updated", 400);
-        }
-
-        $this->updateProductInTheCart($cart, $productInCart, min($data["quantity"], $this::MAXIMUM_QUANTITY));
+        $this->updateProductInTheCart($cart, $product, min($data["quantity"], Cart::MAXIMUM_PRODUCT_QUANTITY));
 
         $cart->touch(); // Update updated_at time on Cart model
 
@@ -125,7 +117,7 @@ class CartController extends Controller
      */
     protected function addProductToTheCart(Cart $cart, Product $product, int $quantity)
     {
-        $cart->products()->attach($product, ["quantity" => $quantity]);
+        $cart->products()->attach($product->id, ["quantity" => $quantity]);
     }
 
     /**

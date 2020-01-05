@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
 {
+    public const MAXIMUM_PRODUCT_QUANTITY = 20;
+
     protected $table = "carts";
 
     protected $keyType = "string";

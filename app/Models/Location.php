@@ -10,6 +10,11 @@ class Location extends Model
     
     public $timestamps = false;
 
+    protected $fillable = [
+        "name",
+        "image_path",
+    ];
+
     public function getRouteKeyName(): string
     {
         return "slug";

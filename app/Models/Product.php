@@ -10,6 +10,17 @@ class Product extends Model
     
     public $timestamps = false;
 
+    protected $fillable = [
+        "name",
+        "description",
+        "ingredients",
+        "mass",
+        "price",
+        "active",
+        "image_path",
+        "category_id",
+    ];
+
     public function category()
     {
         return $this->belongsTo(Category::class);

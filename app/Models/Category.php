@@ -10,6 +10,11 @@ class Category extends Model
     
     public $timestamps = false;
 
+    protected $fillable = [
+        "name",
+        "description",
+    ];
+
     public function supplier()
     {
         return $this->belongsTo(Supplier::class);

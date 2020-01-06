@@ -17,7 +17,7 @@ class CartController extends Controller
     public function createCart(Request $request)
     {
         $data = $request->validate([
-            "location_id" => "required|integer|min:1|exists:locations,id"
+            "location_id" => "required|integer|min:1|exists:locations,id",
         ]);
 
         return Cart::create([

@@ -8,6 +8,7 @@ use App\Models\{
     Product
 };
 use Tests\TestCase;
+use Illuminate\Support\Str;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class GuestCartTest extends TestCase
@@ -38,6 +39,7 @@ class GuestCartTest extends TestCase
         $this->cart = factory(Cart::class)->create(["location_id" => $this->cartLocation->id]);
     }
 
+    /*******************************************************  HAPPY FLOW *******************************************************/
     public function test_guest_can_get_a_cart()
     {
         $this
@@ -112,7 +114,27 @@ class GuestCartTest extends TestCase
             ]);
     }
 
-    public function test_updating_product_that_is_not_in_cart_will_fail()
+    /*******************************************************  NOT SO HAPPY FLOWS *******************************************************/
+    public function test_fetching_cart_that_doesnt_exists_fails()
+    {
+        $nonExistentCartId = Str::orderedUuid()->toString();
+
+        $this
+            ->getJson("/cart/{$nonExistentCartId}")
+            ->assertStatus(404);
+    }
+
+    public function test_adding_product_that_doesnt_exists_fails()
+    {
+        $this
+            ->postJson("/cart/{$this->cart->id}/product", [
+                "product_id"    => Str::orderedUuid()->toString(),
+                "quantity"      => 1
+            ])
+            ->assertStatus(422);
+    }
+
+    public function test_updating_product_that_is_not_in_cart_fails()
     {
         $this
             ->putJson("/cart/{$this->cart->id}/product", [
@@ -160,7 +182,7 @@ class GuestCartTest extends TestCase
             ]);
     }
 
-    public function test_adding_higher_quantity_than_allowed_will_fail()
+    public function test_adding_higher_quantity_than_allowed_fais()
     {
         $this
         ->postJson("/cart/{$this->cart->id}/product", [

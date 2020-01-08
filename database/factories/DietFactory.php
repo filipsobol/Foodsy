@@ -4,7 +4,7 @@
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
-$factory->define(\App\Models\Category::class, function (Faker $faker) {
+$factory->define(\App\Models\Diet::class, function (Faker $faker) {
     $name = $faker->name;
 
     return [

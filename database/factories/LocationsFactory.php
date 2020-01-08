@@ -8,8 +8,8 @@ $factory->define(\App\Models\Location::class, function (Faker $faker) {
     $name = $faker->city;
 
     return [
-        "name" => $name,
-        "slug" => Str::slug($name, '-'),
-        "image_path" => null,
+        "name"          => $name,
+        "slug"          => Str::slug($name, '-'),
+        "image_path"    => null,
     ];
 });

@@ -12,6 +12,7 @@ $factory->define(\App\Models\Product::class, function (Faker $faker) {
         "price"             => $faker->numberBetween(500, 900),
         "active"            => true,
         "image_path"        => null,
-        "category_id"       => fn () => factory(\App\Models\Category::class)->create()->id,
+        "supplier_id"       => factory(\App\Models\Supplier::class),
+        "category_id"       => factory(\App\Models\Category::class),
     ];
 });

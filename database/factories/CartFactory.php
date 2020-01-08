@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 $factory->define(\App\Models\Cart::class, function (Faker $faker) {
     return [
         "id"                => Str::orderedUuid()->toString(),
-        "location_id"       => fn () => factory(\App\Models\Location::class)->create()->id,
+        "location_id"       => factory(\App\Models\Location::class),
         "user_id"           => null,
     ];
 });

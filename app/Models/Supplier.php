@@ -10,6 +10,14 @@ class Supplier extends Model
     
     public $timestamps = false;
 
+    protected $fillable = [
+        "name",
+        "slug",
+        "description",
+        "image_path",
+        "accepts_payments"
+    ];
+
     public function getRouteKeyName(): string
     {
         return "slug";
@@ -20,13 +28,18 @@ class Supplier extends Model
         return $this->belongsToMany(Location::class, "supplier_location");
     }
 
-    public function categories()
-    {
-        return $this->hasMany(Category::class);
-    }
-
     public function products()
     {
-        return $this->hasManyThrough(Product::class, Category::class);
+        return $this->hasMany(Product::class);
+    }
+
+    public function categories()
+    {
+        return $this->hasManyThrough(Category::class, Product::class);
+    }
+
+    public function diets()
+    {
+        return $this->hasManyThrough(Diet::class, Product::class);
     }
 }

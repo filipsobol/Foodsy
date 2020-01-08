@@ -22,8 +22,10 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('price');
             $table->boolean('active');
             $table->string('image_path')->nullable();
-            $table->unsignedBigInteger('category_id')->index();
+            $table->unsignedBigInteger('supplier_id')->index();
+            $table->unsignedBigInteger('category_id');
 
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }

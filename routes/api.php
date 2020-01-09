@@ -3,9 +3,9 @@
 // Locations
 Route::get("/locations", "LocationController@index");
 
-// Suppliers
-Route::get("/suppliers", "SupplierController@index");
-Route::get("/suppliers/{supplier}", "SupplierController@show");
+// Products
+Route::get("/products", "ProductController@index");
+Route::get("/products/{product}", "ProductController@show");
 
 // Cart
 Route::post("/cart", "CartController@createCart");

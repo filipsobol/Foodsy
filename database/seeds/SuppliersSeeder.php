@@ -15,7 +15,7 @@ class SuppliersSeeder extends Seeder
             ->create()
             ->each(function ($supplier, $index) {
                 $supplier->update([
-                    "name"      => "Test supplier #{$index}",
+                    "name"      => "Test supplier {$index}",
                     "slug"      => "test-supplier-{$index}"
                 ]);
 

@@ -32,14 +32,4 @@ class Supplier extends Model
     {
         return $this->hasMany(Product::class);
     }
-
-    public function categories()
-    {
-        return $this->hasManyThrough(Category::class, Product::class);
-    }
-
-    public function diets()
-    {
-        return $this->hasManyThrough(Diet::class, Product::class);
-    }
 }

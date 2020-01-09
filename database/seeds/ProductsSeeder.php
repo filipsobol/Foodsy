@@ -13,7 +13,8 @@ class ProductsSeeder extends Seeder
     {
         for ($i = 0; $i < 50; $i++) {
             $product = factory(\App\Models\Product::class)->create([
-                "name"          => "Test Product #{$i}",
+                "name"          => "Test Product {$i}",
+                "slug"          => "test-product-{$i}",
                 "supplier_id"   => rand(1, 5),
                 "category_id"   => rand(1, 6),
             ]);

@@ -2,10 +2,14 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
 $factory->define(\App\Models\Product::class, function (Faker $faker) {
+    $name = $faker->uuid;
+
     return [
-        "name"              => $faker->uuid,
+        "name"              => $name,
+        "slug"              => Str::slug($name),
         "description"       => $faker->text,
         "ingredients"       => $faker->text,
         "mass"              => $faker->numberBetween(100, 300),

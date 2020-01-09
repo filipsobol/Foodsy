@@ -19,9 +19,4 @@ class Diet extends Model
     {
         return $this->belongsToMany(Product::class, "product_diet");
     }
-
-    public function suppliers()
-    {
-        return $this->hasManyThrough(Supplier::class, Product::class);
-    }
 }

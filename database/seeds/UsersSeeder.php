@@ -15,7 +15,7 @@ class UsersSeeder extends Seeder
             ->create()
             ->each(function ($user, $index) {
                 $user->update([
-                    "name"      => "Test User #{$index}",
+                    "name"      => "Test User {$index}",
                     "email"     => "test{$index}@example.com"
                 ]);
             });

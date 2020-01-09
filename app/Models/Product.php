@@ -6,12 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    public const ALLOWED_SORTING_PARAMETERS = [
+        "name",
+        "price"
+    ];
+
     protected $table = "products";
     
     public $timestamps = false;
 
     protected $fillable = [
         "name",
+        "slug",
         "description",
         "ingredients",
         "mass",
@@ -21,6 +27,11 @@ class Product extends Model
         "supplier_id",
         "category_id",
     ];
+
+    public function getRouteKeyName(): string
+    {
+        return "slug";
+    }
 
     public function supplier()
     {

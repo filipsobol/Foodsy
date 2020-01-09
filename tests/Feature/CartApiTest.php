@@ -11,7 +11,7 @@ use Tests\TestCase;
 use Illuminate\Support\Str;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class GuestCartTest extends TestCase
+class CartApiTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -114,7 +114,7 @@ class GuestCartTest extends TestCase
             ]);
     }
 
-    /*******************************************************  NOT SO HAPPY FLOWS *******************************************************/
+    /***************************************************  NOT SO HAPPY FLOWS ***************************************************/
     public function test_fetching_cart_that_doesnt_exists_fails()
     {
         $nonExistentCartId = Str::orderedUuid()->toString();
@@ -182,7 +182,7 @@ class GuestCartTest extends TestCase
             ]);
     }
 
-    public function test_adding_higher_quantity_than_allowed_fais()
+    public function test_adding_higher_quantity_than_allowed_fails()
     {
         $this
         ->postJson("/cart/{$this->cart->id}/product", [

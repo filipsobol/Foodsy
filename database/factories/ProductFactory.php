@@ -5,7 +5,7 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
 $factory->define(\App\Models\Product::class, function (Faker $faker) {
-    $name = $faker->uuid;
+    $name = $faker->lexify('??????????');
 
     return [
         "name"              => $name,

@@ -1,7 +1,7 @@
 <?php
 
-// Locations
-Route::get("/locations", "LocationController@index");
+// Filters
+Route::get("/filters", "FilterController@index");
 
 // Products
 Route::get("/products", "ProductController@index");

@@ -64,15 +64,6 @@ class ProductController extends Controller
     }
 
     /**
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
@@ -83,24 +74,5 @@ class ProductController extends Controller
         }
 
         return $product->load(["supplier", "category", "diets"]);
-    }
-
-    /**
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Product $product)
-    {
-        //
-    }
-
-    /**
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Product $product)
-    {
-        //
     }
 }
